@@ -3,6 +3,7 @@
 > A maintained fork of [widdershins](https://github.com/Mermade/widdershins) — designed as a **library-first** API for converting OpenAPI/Swagger/AsyncAPI definitions to Markdown or HTML.
 
 [![npm version](https://img.shields.io/npm/v/widdershins-reborn.svg)](https://www.npmjs.com/package/widdershins-reborn)
+[![Socket Badge](https://socket.dev/api/badge/npm/package/widdershins-reborn/latest)](https://socket.dev/npm/package/widdershins-reborn)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Why widdershins-reborn?
@@ -11,8 +12,8 @@ The original `widdershins` package was CLI-focused and unmaintained since 2020. 
 
 - **Library-first** — clean JS API, perfect for apps, build pipelines, and doc generators
 - **Actively maintained** — bug fixes, dependency updates, new features
-- **Modern Node.js** — supports Node 14.x through 22.x
-- **TypeScript-ready** — type definitions included (coming soon)
+- **Modern Node.js** — requires Node >= 20
+- **TypeScript-ready** — type definitions included
 
 ## Install
 
@@ -61,6 +62,27 @@ const markdown = await widdershins.convert(api, {
 console.log(markdown);
 ```
 
+## Pure Markdown Output
+
+Use `cleanMarkdown: true` to get clean, publish-ready markdown with no HTML tags, a generated TOC, and YAML frontmatter:
+
+```javascript
+const markdown = await widdershins.convert(api, {
+  cleanMarkdown: true,
+  sample: true,
+  language_tabs: [],
+});
+```
+
+This will:
+- Convert all HTML headings/links to markdown
+- Strip placeholder JSON sample blocks
+- Generate a table of contents
+- Add YAML frontmatter with API metadata (title, version, servers, stats)
+- Normalize heading hierarchy (title=h1, sections=h2, operations=h3)
+
+Use `omitHeader: true` to skip the YAML frontmatter while keeping other cleanups.
+
 ## API Reference
 
 ### `widdershins.convert(api, options)`
@@ -106,6 +128,8 @@ Converts an API definition to Markdown. Returns a `Promise<string>`.
 | `useBodyName`       | `boolean`  | `false`     | Use original param name for OAS2 body           |
 | `verbose`           | `boolean`  | `false`     | Verbose output                                  |
 | `experimental`      | `boolean`  | `false`     | Use experimental features                       |
+| `cleanMarkdown`     | `boolean`  | `false`     | Post-process to pure markdown (HTML→md, strip placeholder JSON, generate TOC & frontmatter) |
+| `raw`               | `boolean`  | `false`     | Output raw schemas instead of examples          |
 | `toc_footers`       | `array`    | `[]`        | Footer links for TOC                            |
 
 ### Template Callback
@@ -126,9 +150,9 @@ widdershins.convert(api, {
 
 | Format        | Versions | Notes                             |
 | ------------- | -------- | --------------------------------- |
-| OpenAPI       | 3.0.x    | Full support                      |
+| OpenAPI       | 3.0.x, 3.1.x | Full support (3.1: type arrays, const, nullable) |
 | Swagger       | 2.0      | Auto-converted to OAS3 internally |
-| AsyncAPI      | 1.x      | Topics-based messaging APIs       |
+| AsyncAPI      | 1.x, 2.x | Topics/messaging APIs             |
 | Semoasa       | 0.1.0    | OpenAPI Extension Format          |
 | API Blueprint | —        | Passthrough (already Markdown)    |
 
@@ -151,6 +175,12 @@ npx widdershins-reborn [options] {input-file|url} [[-o] output-markdown]
 widdershins-reborn --search false --language_tabs 'python:Python' api.json -o docs.md
 ```
 
+Validate an API definition without generating output:
+
+```bash
+widdershins-reborn --validate api.json
+```
+
 Run `widdershins-reborn --help` for all options.
 
 ## Custom Templates
@@ -165,8 +195,9 @@ widdershins.convert(api, {
 
 Template docs:
 
-- [OpenAPI 3.0 / Swagger 2.0 templates](/templates/openapi3/README.md)
+- [OpenAPI 3.0 / 3.1 / Swagger 2.0 templates](/templates/openapi3/README.md)
 - [AsyncAPI 1.x templates](/templates/asyncapi1/README.md)
+- [AsyncAPI 2.x templates](/templates/asyncapi2/README.md)
 - [Semoasa templates](/templates/semoasa/README.md)
 
 ## Tests
