@@ -1,18 +1,32 @@
 name: Publish to npm
 
 on:
-  release:
-    types: [published]
+  push:
+    branches: [main]
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version to publish (e.g. 0.1.0)'
+        description: 'Version to publish (e.g. 1.0.0)'
         required: true
 
 jobs:
-  publish:
-    name: Publish
+  ci:
+    name: CI
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: npm
+      - run: npm install
+      - run: npm run lint
+      - run: npm test
+
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    needs: [ci]
     permissions:
       contents: read
       id-token: write
@@ -23,8 +37,7 @@ jobs:
           node-version: 22.x
           cache: npm
           registry-url: https://registry.npmjs.org
-      - run: npm ci
-      - run: npm test
+      - run: npm install
       - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
