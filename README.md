@@ -3,6 +3,7 @@
 > A maintained fork of [widdershins](https://github.com/Mermade/widdershins) — designed as a **library-first** API for converting OpenAPI/Swagger/AsyncAPI definitions to Markdown or HTML.
 
 [![npm version](https://img.shields.io/npm/v/widdershins-reborn.svg)](https://www.npmjs.com/package/widdershins-reborn)
+[![Socket Badge](https://socket.dev/api/badge/npm/package/widdershins-reborn/latest)](https://socket.dev/npm/package/widdershins-reborn)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Why widdershins-reborn?
