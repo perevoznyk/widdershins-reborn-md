@@ -1,0 +1,169 @@
+asyncapi: '2.0.0'
+info:
+  title: Streetlights API
+  version: '1.0.0'
+  description: |
+    The Smartylighting Streetlights API allows you to remotely manage the city lights.
+  contact:
+    name: API Support
+    url: https://www.example.com/support
+    email: support@example.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+
+servers:
+  mosquitto:
+    url: mqtt://test.mosquitto.org
+    protocol: mqtt
+
+channels:
+  smartylighting/streetlights/{streetlightId}/event/{lightId}/dimmed:
+    parameters:
+      streetlightId:
+        description: The ID of the streetlight.
+        schema:
+          type: string
+      lightId:
+        description: The ID of the light.
+        schema:
+          type: string
+    publish:
+      summary: Inform about environmental lighting conditions of a specific streetlight.
+      operationId: receiveLightMeasurement
+      message:
+        $ref: '#/components/messages/LightMeasurement'
+
+  smartylighting/streetlights/{streetlightId}/action/{lightId}/turnOn:
+    parameters:
+      streetlightId:
+        description: The ID of the streetlight.
+        schema:
+          type: string
+      lightId:
+        description: The ID of the light.
+        schema:
+          type: string
+    publish:
+      summary: Command a specific streetlight to turn on.
+      operationId: turnOn
+      message:
+        $ref: '#/components/messages/TurnOn'
+
+  smartylighting/streetlights/{streetlightId}/action/{lightId}/turnOff:
+    parameters:
+      streetlightId:
+        description: The ID of the streetlight.
+        schema:
+          type: string
+      lightId:
+        description: The ID of the light.
+        schema:
+          type: string
+    publish:
+      summary: Command a specific streetlight to turn off.
+      operationId: turnOff
+      message:
+        $ref: '#/components/messages/TurnOff'
+
+  smartylighting/streetlights/{streetlightId}/action/{lightId}/dim:
+    parameters:
+      streetlightId:
+        description: The ID of the streetlight.
+        schema:
+          type: string
+      lightId:
+        description: The ID of the light.
+        schema:
+          type: string
+    publish:
+      summary: Command a specific streetlight to dim.
+      operationId: dimLight
+      message:
+        $ref: '#/components/messages/DimLight'
+
+components:
+  messages:
+    LightMeasurement:
+      summary: Light measurement data from a streetlight sensor.
+      headers:
+        type: object
+        properties:
+          streetlightId:
+            type: string
+          sentAt:
+            type: string
+            format: date-time
+      payload:
+        type: object
+        properties:
+          lumens:
+            type: integer
+            minimum: 0
+            description: Light intensity measured in lumens.
+          sentAt:
+            type: string
+            format: date-time
+            description: Timestamp when the measurement was taken.
+
+    TurnOn:
+      summary: Command to turn on a streetlight.
+      headers:
+        type: object
+        properties:
+          streetlightId:
+            type: string
+          sentAt:
+            type: string
+            format: date-time
+      payload:
+        type: object
+        properties:
+          sentAt:
+            type: string
+            format: date-time
+
+    TurnOff:
+      summary: Command to turn off a streetlight.
+      headers:
+        type: object
+        properties:
+          streetlightId:
+            type: string
+          sentAt:
+            type: string
+            format: date-time
+      payload:
+        type: object
+        properties:
+          sentAt:
+            type: string
+            format: date-time
+
+    DimLight:
+      summary: Command to dim a streetlight.
+      headers:
+        type: object
+        properties:
+          streetlightId:
+            type: string
+          sentAt:
+            type: string
+            format: date-time
+      payload:
+        type: object
+        properties:
+          percentage:
+            type: integer
+            minimum: 0
+            maximum: 100
+            description: Percentage to which the light should be dimmed.
+          sentAt:
+            type: string
+            format: date-time
+
+  schemas:
+    lumens:
+      type: integer
+      minimum: 0
+      description: Light intensity measured in lumens.
