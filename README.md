@@ -206,6 +206,32 @@ Template docs:
 npm test
 ```
 
+## Publishing
+
+**npmjs.org:**
+
+```bash
+npm publish
+```
+
+**GitHub Packages:**
+
+1. Create a [personal access token](https://github.com/settings/tokens) with `write:packages` scope
+2. Add to your global `~/.npmrc`:
+   ```
+   //npm.pkg.github.com/:_authToken=YOUR_TOKEN
+   ```
+3. Add to your project `.npmrc`:
+   ```
+   @sikandarsubhani:registry=https://npm.pkg.github.com
+   ```
+4. Publish (GitHub Packages requires a scoped name):
+   ```bash
+   npm pkg set name='@sikandarsubhani/widdershins-reborn'
+   npm publish --registry=https://npm.pkg.github.com --access=public
+   npm pkg set name='widdershins-reborn'
+   ```
+
 ## Credits
 
 - Original project by [Mike Ralphson](https://github.com/Mermade) (Mermade Software)
