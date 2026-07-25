@@ -40,7 +40,7 @@ com.amazon.aws:
             2) CONVERT_TO_BINARY, for converting a text payload into Base64-decoded blob or
             passing through a binary payload natively without modification.
         httpMethod:
-          type:  string
+          type: string
           description: |
             The HTTP method used in the integration request. For Lambda function invocations,
             the value must be POST.
@@ -48,8 +48,8 @@ com.amazon.aws:
     oas2:
       usage: restricted
       objectTypes:
-      - OperationObject
+        - OperationObject
     oas3:
       usage: restricted
       objectTypes:
-      - OperationObject
+        - OperationObject

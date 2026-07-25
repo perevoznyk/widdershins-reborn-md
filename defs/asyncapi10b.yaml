@@ -1,7 +1,7 @@
-asyncapi: "1.0.0"
+asyncapi: '1.0.0'
 info:
   title: Sign up email example
-  version: "1.0.0"
+  version: '1.0.0'
 baseTopic: 'hitch'
 
 servers:
@@ -21,10 +21,10 @@ servers:
 topics:
   accounts.1.0.event.user.signup:
     subscribe:
-      $ref: "#/components/messages/userSignedUp"
+      $ref: '#/components/messages/userSignedUp'
   email.1.0.event.email.sent:
     publish:
-      $ref: "#/components/messages/emailSent"
+      $ref: '#/components/messages/emailSent'
 
 components:
   messages:
@@ -37,9 +37,9 @@ components:
         type: object
         properties:
           user:
-            $ref: "#/components/schemas/user"
+            $ref: '#/components/schemas/user'
           content:
-            $ref: "#/components/schemas/content"
+            $ref: '#/components/schemas/content'
 
     userSignedUp:
       summary: A user has signed up.
@@ -47,9 +47,9 @@ components:
         type: object
         properties:
           user:
-            $ref: "#/components/schemas/user"
+            $ref: '#/components/schemas/user'
           signup:
-            $ref: "#/components/schemas/signup"
+            $ref: '#/components/schemas/signup'
   schemas:
     content:
       title: content
@@ -76,12 +76,12 @@ components:
       properties:
         id:
           description: User Id
-          $ref: "#/components/schemas/id"
+          $ref: '#/components/schemas/id'
         full_name:
           description: User's full name
           type: string
         username:
-          $ref: "#/components/schemas/username"
+          $ref: '#/components/schemas/username'
     signup:
       type: object
       required:
@@ -98,4 +98,4 @@ components:
             - github
             - google
         datetime:
-          $ref: "#/components/schemas/datetime"
+          $ref: '#/components/schemas/datetime'

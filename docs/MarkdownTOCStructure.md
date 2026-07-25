@@ -14,9 +14,8 @@ In AsyncAPI v1 `tags` and `topics` are used in a similar way to that of OpenAPI 
 
 ## AsyncAPI 2
 
-* TODO
+- TODO
 
 ## Semoasa
 
 In Semoasa v1, the `namespace` and `extension` property keys are used to generate the TOC entries.
-

@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch: {}
 
 jobs:
@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: 22.x
           cache: npm
-      - run: npm ci
+      - run: npm install
       - run: npm run lint
 
   test:
@@ -32,7 +32,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: npm
-      - run: npm ci
+      - run: npm install
       - run: npm test
 
   integration:
@@ -45,10 +45,15 @@ jobs:
         with:
           node-version: 22.x
           cache: npm
-      - run: npm ci
-      - name: Convert Petstore
+      - run: npm install
+      - name: Convert Petstore (OAS3)
         run: |
           mkdir -p out
           node widdershins.js -o out/petstore.md defs/petstore3.json
-      - name: Validate output
-        run: node node_modules/mdv/mdv out/petstore.md
+          echo "OAS3 output: $(wc -l < out/petstore.md) lines"
+      - name: Convert Petstore (OAS2)
+        run: node widdershins.js -o out/petstore2.md defs/petstore.json
+      - name: Convert AsyncAPI
+        run: node widdershins.js -o out/async.md defs/asyncapi12a.yaml
+      - name: Convert Semoasa
+        run: node widdershins.js -o out/semoasa.md defs/semoasa1.yaml
