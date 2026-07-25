@@ -142,6 +142,9 @@ var argv = require('yargs')
   .boolean('yaml')
   .alias('y', 'yaml')
   .describe('yaml', 'Display JSON schemas in YAML format.')
+  .boolean('validate')
+  .alias('z', 'validate')
+  .describe('validate', 'Validate the input spec and exit without converting.')
   .help('h')
   .alias('h', 'Show help.')
   .version().argv;
@@ -156,6 +159,30 @@ async function doit(s) {
     console.error('Failed to parse YAML/JSON, falling back to API Blueprint');
     console.error(ex.message);
     api = s;
+  }
+
+  let isValid = typeof api === 'object' && api !== null;
+  let format = 'API Blueprint';
+  if (isValid) {
+    if (api.swagger) format = 'Swagger ' + api.swagger;
+    else if (api.openapi) format = 'OpenAPI ' + api.openapi;
+    else if (api.asyncapi) format = 'AsyncAPI ' + api.asyncapi;
+    else if (api.openapiExtensionFormat) format = 'Semoasa';
+  }
+
+  if (argv.validate) {
+    if (!isValid) {
+      console.error('Validation failed: input is not a valid object');
+      process.exitCode = 1;
+      return;
+    }
+    console.error('Valid ' + format + ' document');
+    if (api.info && api.info.title) console.error('  Title: ' + api.info.title);
+    if (api.info && api.info.version) console.error('  Version: ' + api.info.version);
+    if (api.paths) console.error('  Paths: ' + Object.keys(api.paths).length);
+    if (api.channels) console.error('  Channels: ' + Object.keys(api.channels).length);
+    if (api.topics) console.error('  Topics: ' + Object.keys(api.topics).length);
+    return;
   }
 
   try {
