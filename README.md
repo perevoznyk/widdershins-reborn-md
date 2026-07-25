@@ -200,6 +200,33 @@ Template docs:
 - [AsyncAPI 2.x templates](/templates/asyncapi2/README.md)
 - [Semoasa templates](/templates/semoasa/README.md)
 
+## Docker
+
+Run without installing Node.js — Docker is the only dependency:
+
+```bash
+docker run --rm -v $(pwd):/app widdershins-reborn api.json -o /app/docs.md
+```
+
+With options:
+
+```bash
+docker run --rm \
+  -v $(pwd):/app \
+  widdershins-reborn \
+  /app/api.json \
+  --search false \
+  --cleanMarkdown \
+  --language_tabs 'python:Python' \
+  -o /app/docs.md
+```
+
+Build locally:
+
+```bash
+docker build . -t widdershins-reborn
+```
+
 ## Tests
 
 ```bash

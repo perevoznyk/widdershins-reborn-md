@@ -145,6 +145,11 @@ var argv = require('yargs')
   .boolean('validate')
   .alias('z', 'validate')
   .describe('validate', 'Validate the input spec and exit without converting.')
+  .boolean('cleanMarkdown')
+  .describe(
+    'cleanMarkdown',
+    'Post-process to pure markdown: convert HTML to markdown, strip placeholder JSON, generate TOC and frontmatter.'
+  )
   .help('h')
   .alias('h', 'Show help.')
   .version().argv;
@@ -236,6 +241,7 @@ options.omitHeader = argv.omitHeader;
 options.shallowSchemas = argv.shallowSchemas;
 options.yaml = argv.yaml;
 options.customApiKeyValue = argv.customApiKeyValue;
+options.cleanMarkdown = argv.cleanMarkdown;
 options.html = argv.html;
 options.respec = argv.respec;
 options.useBodyName = argv.useBodyName;
