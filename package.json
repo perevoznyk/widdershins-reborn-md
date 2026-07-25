@@ -25,8 +25,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "build": "node scripts/compile-templates.js",
-    "prepublishOnly": "node scripts/compile-templates.js",
+        "build": "node scripts/compile-templates.js",
     "lint": "npx eslint@8 *.js lib/*.js test/*.js",
     "shins": "node widdershins-reborn --discovery -o ../shins/source/index.html.md defs/petstore.json",
     "test": "nyc mocha"
