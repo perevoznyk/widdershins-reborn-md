@@ -1,24 +1,43 @@
 # widdershins-reborn
 
-> A maintained fork of [widdershins](https://github.com/Mermade/widdershins) — designed as a **library-first** API for converting OpenAPI/Swagger/AsyncAPI definitions to Markdown or HTML.
+> **The maintained OpenAPI-to-Markdown converter.** Convert [OpenAPI 3.0/3.1](https://spec.openapis.org/oas/v3.1.0), [Swagger 2.0](https://swagger.io/specification/v2/), [AsyncAPI 1.x/2.x](https://www.asyncapi.com/), and [Semoasa](https://github.com/mermade/semoasa) definitions into clean Markdown or HTML documentation — for [Slate](https://github.com/slatedocs/slate), [Redoc](https://redocly.com/docs/redoc), [ReSpec](https://github.com/w3c/respec), or any static site generator.
 
 [![npm version](https://img.shields.io/npm/v/widdershins-reborn.svg)](https://www.npmjs.com/package/widdershins-reborn)
+[![npm downloads](https://img.shields.io/npm/dm/widdershins-reborn.svg)](https://www.npmjs.com/package/widdershins-reborn)
 [![Socket Badge](https://socket.dev/api/badge/npm/package/widdershins-reborn/latest)](https://socket.dev/npm/package/widdershins-reborn)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org)
+[![GitHub Actions](https://img.shields.io/github/actions/workflow/status/sikandarsubhani/widdershins-reborn/ci.yaml?branch=main)](https://github.com/sikandarsubhani/widdershins-reborn/actions)
 
 ## Why widdershins-reborn?
 
-The original `widdershins` package was CLI-focused and unmaintained since 2020. This fork is:
+[widdershins](https://github.com/Mermade/widdershins) was the go-to OpenAPI-to-Markdown tool but has been **unmaintained since 2020**. It doesn't work with Node 20+, has known security vulnerabilities, and lacks ESM/TypeScript support.
 
-- **Library-first** — clean JS API, perfect for apps, build pipelines, and doc generators
-- **Actively maintained** — bug fixes, dependency updates, new features
-- **Modern Node.js** — requires Node >= 20
-- **TypeScript-ready** — type definitions included
+**widdershins-reborn** picks up where widdershins left off:
+
+| | widdershins | widdershins-reborn |
+|---|---|---|
+| Last updated | 2020 | 2026 |
+| Node.js | 8–14 | 20+ |
+| ESM support | No | Yes |
+| TypeScript types | No | Yes |
+| OAS 3.1 | No | Yes (type arrays, const, nullable) |
+| AsyncAPI 2.x | No | Yes |
+| Docker | No | Yes |
+| cleanMarkdown | No | Yes (pure markdown output) |
+| Security | 13+ known vulns | 0 vulnerabilities |
+| Maintained | No | Yes |
 
 ## Install
 
 ```bash
 npm install widdershins-reborn
+```
+
+Or use Docker:
+
+```bash
+docker run --rm -v $(pwd):/app widdershins-reborn /app/api.json -o /app/docs.md
 ```
 
 ## Quick Start (JavaScript)
@@ -258,6 +277,54 @@ npm publish
    npm publish --registry=https://npm.pkg.github.com --access=public
    npm pkg set name='widdershins-reborn'
    ```
+
+## Migrating from widdershins
+
+Drop-in replacement — just change the package name:
+
+```bash
+npm uninstall widdershins
+npm install widdershins-reborn
+```
+
+```diff
+- const widdershins = require('widdershins');
++ const widdershins = require('widdershins-reborn');
+```
+
+```diff
+- "widdershins": "^3.0.0"
++ "widdershins-reborn": "^0.1.4"
+```
+
+The API is identical. New options available:
+
+```javascript
+widdershins.convert(api, {
+  cleanMarkdown: true,  // new: pure markdown output
+  // ...all existing options still work
+});
+```
+
+## Who uses widdershins-reborn?
+
+widdershins-reborn is used for generating API documentation from OpenAPI, Swagger, and AsyncAPI specs in:
+
+- **Static doc sites** — Slate, Redoc, ReDocly, custom generators
+- **CI/CD pipelines** — automated doc generation on spec changes
+- **Node.js apps** — runtime markdown generation (Next.js, Express, Fastify)
+- **Docker pipelines** — zero-dependency doc builds
+- **Microservices** — event-driven API docs from AsyncAPI
+
+## Comparison with alternatives
+
+| Tool | Input Formats | Output | Library API | Docker | Maintained |
+|---|---|---|---|---|---|
+| [widdershins-reborn](https://www.npmjs.com/package/widdershins-reborn) | OAS 3.0/3.1, Swagger 2.0, AsyncAPI 1.x/2.x, Semoasa | Markdown, HTML | Yes | Yes | Yes |
+| [redoc](https://www.npmjs.com/package/redoc) | OpenAPI 3.x | HTML only | Yes | Yes | Yes |
+| [swagger-ui](https://www.npmjs.com/package/swagger-ui) | OpenAPI 3.x, Swagger 2.0 | HTML only | Yes | Yes | Yes |
+| [openapi-to-md](https://www.npmjs.com/package/openapi-to-md) | OpenAPI 3.x | Markdown | Yes | No | No |
+| [openapi-diff](https://www.npmjs.com/package/openapi-diff) | OpenAPI 3.x | Diff only | Yes | No | No |
 
 ## Credits
 
