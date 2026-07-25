@@ -11,7 +11,7 @@ const fetch = require('node-fetch');
 const converter = require('./lib/index.js');
 
 var argv = require('yargs')
-    .usage('widdershins [options] {input-file|url} [[-o] output markdown]')
+    .usage('widdershins-reborn [options] {input-file|url} [[-o] output markdown]')
     .demand(1)
     .strict()
     .string('abstract')

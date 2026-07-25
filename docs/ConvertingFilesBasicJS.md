@@ -1,7 +1,7 @@
-# Converting an OpenAPI/Swagger file to Markdown with the Widdershins JavaScript interface
+# Converting an OpenAPI/Swagger file to Markdown with the Widdershins-reborn JavaScript interface
 
-Using Widdershins in a JavaScript program gives you control over the full range of options.
-To use Widdershins from the CLI, see [Converting an OpenAPI/Swagger file to Markdown with the Widdershins CLI](ConvertingFilesBasicCLI.md).
+Using Widdershins-reborn in a JavaScript program gives you control over the full range of options.
+To use Widdershins-reborn from the CLI, see [Converting an OpenAPI/Swagger file to Markdown with the CLI](ConvertingFilesBasicCLI.md).
 
 ## Prerequisites
 
@@ -9,24 +9,24 @@ To use Widdershins from the CLI, see [Converting an OpenAPI/Swagger file to Mark
 See [nodejs.org](https://nodejs.org/).
 - If you don't already have an NPM project, run `npm init` from the folder in which you want to create the program.
 NPM walks you through the process of setting up an NPM project and creates a `package.json` file to store the project configuration.
-Most of the NPM settings are not relevant to Widdershins; the important part of the process is that it sets up a project that can install and manage NPM packages such as Widdershins so you can use those packages in your programs.
-- From the root folder of your project (the folder that contains the `package.json` file), add Widdershins as a dependency by running this command:
+Most of the NPM settings are not relevant to Widdershins-reborn; the important part of the process is that it sets up a project that can install and manage NPM packages such as Widdershins-reborn so you can use those packages in your programs.
+- From the root folder of your project (the folder that contains the `package.json` file), add Widdershins-reborn as a dependency by running this command:
 ```shell
-npm install --save widdershins
+npm install --save widdershins-reborn
 ```
 
-Now you can use Widdershins in JavaScript programs in the project.
+Now you can use Widdershins-reborn in JavaScript programs in the project.
 
 ## Converting files with JavaScript
 
 1. Create a JavaScript program with the following general steps.
 You can name the file anything you want.
-1. In the JavaScript file, import Widdershins so you can use it in the program:
+1. In the JavaScript file, import Widdershins-reborn so you can use it in the program:
 ```javascript
-const widdershins = require('widdershins');
+const widdershins = require('widdershins-reborn');
 ```
 1. Set up your options in an `options` object.
-Use the JavaScript parameter name from the [README.md](https://github.com/Mermade/widdershins#options) file, not the CLI parameter name.
+Use the JavaScript parameter name from the [README.md](https://github.com/sikandarsubhani/widdershins-reborn#cli-options) file, not the CLI parameter name.
 For example, these options generate code samples in Python and Ruby:
 ```javascript
 const options = {
@@ -40,8 +40,8 @@ const fs = require('fs');
 const fileData = fs.readFileSync('swagger.json', 'utf8');
 const swaggerFile = JSON.parse(fileData);
 ```
-1. Use Widdershins to convert the file.
-Widdershins returns the converted Markdown via a Promise:
+1. Use Widdershins-reborn to convert the file.
+Widdershins-reborn returns the converted Markdown via a Promise:
 ```javascript
 widdershins.convert(swaggerFile, options)
 .then(markdownOutput => {
@@ -70,7 +70,7 @@ node convertMarkdown.js
 The complete JavaScript program looks like this:
 
 ```javascript
-const widdershins = require('widdershins');
+const widdershins = require('widdershins-reborn');
 const fs = require('fs');
 
 const options = {

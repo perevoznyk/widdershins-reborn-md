@@ -8,7 +8,8 @@ const sampleData = {
     baseUrl: 'http://sample.com',
     requiredUriExample: '/books',
     queryParameters: [],
-    allHeaders: []
+    allHeaders: [],
+    options: { verbose: false }
 };
 
 describe('httpsnippetGenerator tests', () => {
