@@ -10,9 +10,7 @@
   "api": {},
   "options": {
     "title": "API",
-    "language_tabs": [
-      "shell"
-    ],
+    "language_tabs": ["shell"],
     "toc_footers": [],
     "includes": [],
     "search": true,
@@ -48,9 +46,7 @@
   "version": "v3.0.0",
   "header": {
     "title": "Nexio API Reference v3.0.0",
-    "language_tabs": [
-      "shell"
-    ],
+    "language_tabs": ["shell"],
     "toc_footers": [],
     "includes": [],
     "search": true,

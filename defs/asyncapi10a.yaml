@@ -1,7 +1,7 @@
-asyncapi: "1.0.0"
+asyncapi: '1.0.0'
 info:
   title: AsyncAPI Sample
-  version: "1.0.0"
+  version: '1.0.0'
   x-logo: https://avatars0.githubusercontent.com/u/16401334?v=4&s=200
   description: |
     This is a simple example of an _AsyncAPI_ document.
@@ -29,10 +29,10 @@ externalDocs:
 topics:
   accounts.1.0.action.user.signup:
     publish:
-      $ref: "#/components/messages/userSignUp"
+      $ref: '#/components/messages/userSignUp'
   accounts.1.0.event.user.signup:
     subscribe:
-      $ref: "#/components/messages/userSignedUp"
+      $ref: '#/components/messages/userSignedUp'
 
 components:
   messages:
@@ -48,25 +48,25 @@ components:
         type: object
         properties:
           qos:
-            $ref: "#/components/schemas/MQTTQoSHeader"
+            $ref: '#/components/schemas/MQTTQoSHeader'
           retainFlag:
-            $ref: "#/components/schemas/MQTTRetainHeader"
+            $ref: '#/components/schemas/MQTTRetainHeader'
       payload:
         type: object
         properties:
           user:
-            $ref: "#/components/schemas/userCreate"
+            $ref: '#/components/schemas/userCreate'
           signup:
-            $ref: "#/components/schemas/signup"
+            $ref: '#/components/schemas/signup'
 
     userSignedUp:
       payload:
         type: object
         properties:
           user:
-            $ref: "#/components/schemas/user"
+            $ref: '#/components/schemas/user'
           signup:
-            $ref: "#/components/schemas/signup"
+            $ref: '#/components/schemas/signup'
   schemas:
     id:
       title: id
@@ -107,12 +107,12 @@ components:
       properties:
         id:
           description: User Id
-          $ref: "#/components/schemas/id"
+          $ref: '#/components/schemas/id'
         full_name:
           description: User full name
           type: string
         username:
-          $ref: "#/components/schemas/username"
+          $ref: '#/components/schemas/username'
     userCreate:
       type: object
       required:
@@ -122,7 +122,7 @@ components:
           description: User full name
           type: string
         username:
-          $ref: "#/components/schemas/username"
+          $ref: '#/components/schemas/username'
     signup:
       type: object
       required:
@@ -139,4 +139,4 @@ components:
             - github
             - google
         datetime:
-          $ref: "#/components/schemas/datetime"
+          $ref: '#/components/schemas/datetime'

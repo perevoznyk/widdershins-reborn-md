@@ -57,15 +57,15 @@ components:
     lightMeasured:
       summary: Inform about environmental lighting conditions for a particular streetlight.
       payload:
-        $ref: "#/components/schemas/lightMeasuredPayload"
+        $ref: '#/components/schemas/lightMeasuredPayload'
     turnOnOff:
       summary: Command a particular streetlight to turn the lights on or off.
       payload:
-        $ref: "#/components/schemas/turnOnOffPayload"
+        $ref: '#/components/schemas/turnOnOffPayload'
     dimLight:
       summary: Command a particular streetlight to dim the lights.
       payload:
-        $ref: "#/components/schemas/dimLightPayload"
+        $ref: '#/components/schemas/dimLightPayload'
 
   schemas:
     lightMeasuredPayload:
@@ -76,7 +76,7 @@ components:
           minimum: 0
           description: Light intensity measured in lumens.
         sentAt:
-          $ref: "#/components/schemas/sentAt"
+          $ref: '#/components/schemas/sentAt'
     turnOnOffPayload:
       type: object
       properties:
@@ -87,7 +87,7 @@ components:
             - off
           description: Whether to turn on or off the light.
         sentAt:
-          $ref: "#/components/schemas/sentAt"
+          $ref: '#/components/schemas/sentAt'
     dimLightPayload:
       type: object
       properties:
@@ -97,7 +97,7 @@ components:
           minimum: 0
           maximum: 100
         sentAt:
-          $ref: "#/components/schemas/sentAt"
+          $ref: '#/components/schemas/sentAt'
     sentAt:
       type: string
       format: date-time

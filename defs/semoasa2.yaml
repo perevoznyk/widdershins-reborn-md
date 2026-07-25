@@ -14,17 +14,17 @@ guru.apis:
           type: string
           format: uri-ref
       required:
-      - url
+        - url
     example:
-      url: "https://developer.bbc.co.uk/user/register"
+      url: 'https://developer.bbc.co.uk/user/register'
     oas2:
       usage: restricted
       objectTypes:
-      - InfoObject
+        - InfoObject
     oas3:
       usage: restricted
       objectTypes:
-      - InfoObject
+        - InfoObject
   x-apisguru-categories:
     description: A property of the info object, `x-apisguru-categories` is an array of valid values from the list of APIs.guru categories.
     externalDocs:
@@ -38,11 +38,11 @@ guru.apis:
     oas2:
       usage: restricted
       objectTypes:
-      - InfoObject
+        - InfoObject
     oas3:
       usage: restricted
       objectTypes:
-      - InfoObject
+        - InfoObject
   x-description-language:
     description: An ISO-639 two-character language code to identify the natural language used in descriptions, summaries and titles. This can be used as an input to translating these items.
     schema:
@@ -50,11 +50,11 @@ guru.apis:
     oas2:
       usage: restricted
       objectTypes:
-      - InfoObject
+        - InfoObject
     oas3:
       usage: restricted
       objectTypes:
-      - InfoObject
+        - InfoObject
   x-hasEquivalentPaths:
     description: A property of the `root` object, `x-hasEquivalentPaths` indicates the source specification has multiple paths which map to the same OpenAPI path (possibly disambiguated with HTML fragment identifiers or differently named path parameters).
     schema:
@@ -62,11 +62,11 @@ guru.apis:
     oas2:
       usage: restricted
       objectTypes:
-      - SwaggerObject
+        - SwaggerObject
     oas3:
       usage: restricted
       objectTypes:
-      - OpenAPIObject
+        - OpenAPIObject
   x-logo:
     summary: A logo for the API.
     description: |
@@ -84,15 +84,15 @@ guru.apis:
         backgroundColor:
           type: string
       required:
-      - url
+        - url
     oas2:
       usage: restricted
       objectTypes:
-      - InfoObject
+        - InfoObject
     oas3:
       usage: restricted
       objectTypes:
-      - InfoObject
+        - InfoObject
   x-origin:
     description: |
       A property of the `info` object, the `x-origin` structure is used to document the source and format of an API in the collection. It is used to round-trip the process of keeping the APIs updated.
@@ -119,10 +119,10 @@ guru.apis:
           format:
             type: string
             enum:
-            - swagger
-            - api_blueprint
-            - raml
-            - google
+              - swagger
+              - api_blueprint
+              - raml
+              - google
           version:
             type: string
           contentType:
@@ -136,36 +136,36 @@ guru.apis:
               version:
                 type: string
         required:
-        - url
+          - url
     example:
-      - url: "http://programmes.api.bbc.com/nitro/api"
+      - url: 'http://programmes.api.bbc.com/nitro/api'
         contentType: application/json
         converter:
-          url: "https://github.com/mermade/bbcparse"
-          version: "1.2.0"
+          url: 'https://github.com/mermade/bbcparse'
+          version: '1.2.0'
       - format: swagger
         url: 'https://raw.githubusercontent.com/Mermade/bbcparse/master/iblApi/swagger.json'
         version: '2.0'
     oas2:
       usage: restricted
       objectTypes:
-      - InfoObject
+        - InfoObject
     oas3:
       usage: restricted
       objectTypes:
-      - InfoObject
+        - InfoObject
   x-preferred:
-    description: "A property of the `info` object, `x-preferred` is a Boolean property which distinguishes between multiple versions of the same API. Where the `x-providerName` and `x-serviceName` are the same, only one definition should be marked `x-preferred: true`. This helps users of the APIs.guru collection organise and display the APIs."
+    description: 'A property of the `info` object, `x-preferred` is a Boolean property which distinguishes between multiple versions of the same API. Where the `x-providerName` and `x-serviceName` are the same, only one definition should be marked `x-preferred: true`. This helps users of the APIs.guru collection organise and display the APIs.'
     schema:
       type: boolean
     oas2:
       usage: restricted
       objectTypes:
-      - InfoObject
+        - InfoObject
     oas3:
       usage: restricted
       objectTypes:
-      - InfoObject
+        - InfoObject
   x-providerName:
     description: A property of the `info` object, `x-providerName` is used to identify the domain of the API host. It is added automatically by APIs.guru
     schema:
@@ -173,11 +173,11 @@ guru.apis:
     oas2:
       usage: restricted
       objectTypes:
-      - InfoObject
+        - InfoObject
     oas3:
       usage: restricted
       objectTypes:
-      - InfoObject
+        - InfoObject
   x-serviceName:
     description: A property of the `info` object, `x-serviceName` is used to distinguish APIs which are served from the same domain. It may be the subdomain if the API uses one. It is added automatically by APIs.guru
     schema:
@@ -185,11 +185,11 @@ guru.apis:
     oas2:
       usage: restricted
       objectTypes:
-      - InfoObject
+        - InfoObject
     oas3:
       usage: restricted
       objectTypes:
-      - InfoObject
+        - InfoObject
   x-tags:
     description: Also a property of the `info` object, `x-tags` is an array of free-form keywords/tags applicable to the API.
     schema:
@@ -199,11 +199,11 @@ guru.apis:
     oas2:
       usage: restricted
       objectTypes:
-      - InfoObject
+        - InfoObject
     oas3:
       usage: restricted
       objectTypes:
-      - InfoObject
+        - InfoObject
   x-unofficialSpec:
     description: A property of the `info` object, `x-unofficialSpec` indicates the definition is produced by a third-party, either manually, by scraping existing documentation or converting a proprietary/undocumented format.
     schema:
@@ -211,11 +211,11 @@ guru.apis:
     oas2:
       usage: restricted
       objectTypes:
-      - InfoObject
+        - InfoObject
     oas3:
       usage: restricted
       objectTypes:
-      - InfoObject
+        - InfoObject
 components:
   externalDocs:
     apis-guru:
