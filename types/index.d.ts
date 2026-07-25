@@ -58,6 +58,8 @@ export interface ConvertOptions {
   raw?: boolean;
   /** Use httpsnippet for multipart media types. */
   experimental?: boolean;
+  /** Post-process output to pure markdown: convert HTML tags to markdown, strip placeholder JSON samples. Default: `false`. */
+  cleanMarkdown?: boolean;
 }
 
 /**
