@@ -34,7 +34,6 @@ jobs:
           cache: npm
           registry-url: https://registry.npmjs.org
       - run: npm ci
-      - run: npm run build
       - run: npm publish --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -55,7 +54,6 @@ jobs:
           registry-url: https://npm.pkg.github.com
           scope: '@sikandarsubhani'
       - run: npm ci
-      - run: npm run build
       - name: Set scoped name for publish
         run: npm pkg set name='@sikandarsubhani/widdershins-reborn'
       - run: npm publish --access=public
