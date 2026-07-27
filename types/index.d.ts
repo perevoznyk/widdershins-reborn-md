@@ -58,8 +58,12 @@ export interface ConvertOptions {
   raw?: boolean;
   /** Use httpsnippet for multipart media types. */
   experimental?: boolean;
-  /** Post-process output to pure markdown: convert HTML tags to markdown, strip placeholder JSON samples. Default: `false`. */
+  /** Post-process output to pure markdown: convert HTML to markdown, strip placeholder JSON, generate TOC & frontmatter. Default: `false`. */
   cleanMarkdown?: boolean;
+  /** Show JSON examples under schema headings. When `false`, strips JSON and keeps only the description and properties. Default: `true`. */
+  showSchemaJson?: boolean;
+  /** Output HTML instead of Markdown. */
+  html?: boolean;
 }
 
 /**
@@ -73,3 +77,9 @@ export function convert(
   api: Record<string, any> | string,
   options?: ConvertOptions
 ): Promise<string>;
+
+/**
+ * Default export containing the `convert` function.
+ */
+declare const widdershins: { convert: typeof convert };
+export default widdershins;

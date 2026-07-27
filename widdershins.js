@@ -150,6 +150,12 @@ var argv = require('yargs')
     'cleanMarkdown',
     'Post-process to pure markdown: convert HTML to markdown, strip placeholder JSON, generate TOC and frontmatter.'
   )
+  .boolean('showSchemaJson')
+  .default('showSchemaJson', true)
+  .describe(
+    'showSchemaJson',
+    'Show JSON examples under schema headings. When false, strips JSON and keeps only description and properties.'
+  )
   .help('h')
   .alias('h', 'Show help.')
   .version().argv;
@@ -242,6 +248,7 @@ options.shallowSchemas = argv.shallowSchemas;
 options.yaml = argv.yaml;
 options.customApiKeyValue = argv.customApiKeyValue;
 options.cleanMarkdown = argv.cleanMarkdown;
+options.showSchemaJson = argv.showSchemaJson;
 options.html = argv.html;
 options.respec = argv.respec;
 options.useBodyName = argv.useBodyName;
