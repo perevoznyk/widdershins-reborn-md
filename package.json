@@ -1,6 +1,6 @@
 {
   "name": "widdershins-reborn",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Convert OpenAPI / Swagger / AsyncAPI / Semoasa definitions to Markdown or HTML — for apps, docs pipelines, and static site generators",
   "main": "lib/index.js",
   "module": "./index.mjs",
