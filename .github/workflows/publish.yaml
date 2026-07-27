@@ -1,13 +1,9 @@
-name: Publish to npm and GitHub Packages
+name: Publish
 
 on:
   push:
-    branches: [main]
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version to publish (e.g. 1.0.0)'
-        required: true
+    tags:
+      - 'v*'
 
 jobs:
   ci:
@@ -19,7 +15,7 @@ jobs:
         with:
           node-version: 22.x
           cache: npm
-      - run: npm install
+      - run: npm ci
       - run: npm run lint
       - run: npm test
 
@@ -37,21 +33,9 @@ jobs:
           node-version: 22.x
           cache: npm
           registry-url: https://registry.npmjs.org
-      - run: npm install
-      - name: Check if version exists on npm
-        id: check-npm
-        run: |
-          VERSION=$(node -p "require('./package.json').version")
-          if npm view widdershins-reborn@"$VERSION" version 2>/dev/null; then
-            echo "exists=true" >> "$GITHUB_OUTPUT"
-            echo "Version $VERSION already published to npm — skipping"
-          else
-            echo "exists=false" >> "$GITHUB_OUTPUT"
-            echo "Version $VERSION not on npm — will publish"
-          fi
-      - name: Publish to npm
-        if: steps.check-npm.outputs.exists == 'false'
-        run: npm publish --provenance --access public
+      - run: npm ci
+      - run: npm run build
+      - run: npm publish --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -70,26 +54,12 @@ jobs:
           cache: npm
           registry-url: https://npm.pkg.github.com
           scope: '@sikandarsubhani'
-      - run: npm install
-      - name: Check if version exists on GitHub Packages
-        id: check-ghp
-        run: |
-          VERSION=$(node -p "require('./package.json').version")
-          if npm view @sikandarsubhani/widdershins-reborn@"$VERSION" version --registry=https://npm.pkg.github.com 2>/dev/null; then
-            echo "exists=true" >> "$GITHUB_OUTPUT"
-            echo "Version $VERSION already published to GitHub Packages — skipping"
-          else
-            echo "exists=false" >> "$GITHUB_OUTPUT"
-            echo "Version $VERSION not on GitHub Packages — will publish"
-          fi
+      - run: npm ci
+      - run: npm run build
       - name: Set scoped name for publish
-        if: steps.check-ghp.outputs.exists == 'false'
         run: npm pkg set name='@sikandarsubhani/widdershins-reborn'
-      - name: Publish to GitHub Packages
-        if: steps.check-ghp.outputs.exists == 'false'
-        run: npm publish --access=public
+      - run: npm publish --access=public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Restore unscoped name
-        if: steps.check-ghp.outputs.exists == 'false'
         run: npm pkg set name='widdershins-reborn'

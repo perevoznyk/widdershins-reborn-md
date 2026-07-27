@@ -49,3 +49,4 @@ jspm_packages
 .node_repl_history
 .npmrc
 .envOpenAPI Specification - Version 3.1.0.md
+.env*
